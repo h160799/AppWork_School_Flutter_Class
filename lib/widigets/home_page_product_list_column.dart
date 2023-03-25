@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_programe_johnny/data/home_page_data.dart';
 import 'package:flutter_programe_johnny/widigets/product_list_item.dart';
 
-class HomeProductListColumn extends StatelessWidget {
-   HomeProductListColumn({super.key});
+class HomeProductListColumn extends StatefulWidget {
+  const HomeProductListColumn({Key? key}) : super(key: key);
+
+  @override
+  _HomeProductListColumnState createState() => _HomeProductListColumnState();
+}
+
+class _HomeProductListColumnState extends State<HomeProductListColumn> {
 
   final List<ProductList> listItems = List<ProductList>.generate(15, (index) {
     return ProductList(
@@ -15,28 +21,46 @@ class HomeProductListColumn extends StatelessWidget {
         price: 323);
   });
 
+  
 
-Widget _buildCategoryList(String category) {
+  final Map<String, bool> _isVisibleMap = {
+    '女裝': false,
+    '男裝': false,
+    '配件': false,
+  };
+  
+
+  Widget _buildCategoryList(String category) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const SizedBox(height: 10),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Text(
-            category,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
+          child: InkWell(
+            onTap:() {
+              setState(() {
+                _isVisibleMap[category] = !_isVisibleMap[category]!;
+              });
+            },
+            child: Text(
+              category,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
-        ListView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: listItems.length,
-          itemBuilder: (context, index) {
-            return ProductListItem(item: listItems[index]);
-          },
+        Visibility(
+          visible: _isVisibleMap[category]!,
+          child: ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: listItems.length,
+            itemBuilder: (context, index) {
+              return ProductListItem(item: listItems[index]);
+            },
+          ),
         ),
       ],
     );
@@ -56,6 +80,4 @@ Widget _buildCategoryList(String category) {
       ),
     );
   }
-
-  
 }
