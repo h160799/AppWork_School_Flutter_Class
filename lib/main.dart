@@ -11,13 +11,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'STYLiSH',
-            style: TextStyle(
-                fontFamily:'Noto Sans',
-                color: Colors.black,
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 120.0, // 设置图像的宽度
+                child: Image.asset(
+                  'assets/images/stylish_Logo.png',
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
+            ],
           ),
           backgroundColor: Colors.grey[200],
         ),

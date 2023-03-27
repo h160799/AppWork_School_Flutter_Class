@@ -10,7 +10,6 @@ class HomeProductListColumn extends StatefulWidget {
 }
 
 class _HomeProductListColumnState extends State<HomeProductListColumn> {
-
   final List<ProductList> listItems = List<ProductList>.generate(15, (index) {
     return ProductList(
         productStyle: '女裝',
@@ -21,14 +20,11 @@ class _HomeProductListColumnState extends State<HomeProductListColumn> {
         price: 323);
   });
 
-  
-
   final Map<String, bool> _isVisibleMap = {
     '女裝': false,
     '男裝': false,
     '配件': false,
   };
-  
 
   Widget _buildCategoryList(String category) {
     return Column(
@@ -38,7 +34,7 @@ class _HomeProductListColumnState extends State<HomeProductListColumn> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: InkWell(
-            onTap:() {
+            onTap: () {
               setState(() {
                 _isVisibleMap[category] = !_isVisibleMap[category]!;
               });
