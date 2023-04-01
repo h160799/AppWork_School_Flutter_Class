@@ -15,6 +15,7 @@ class ProductList {
   final String productContent;
   final String productDescription;
   final List<Image> productImage;
+  final List<AssetImage> productCoverImage;
   final List<ProductVariant> variants;
   final List<int> colorType;
   final List<String> sizeType;
@@ -29,6 +30,7 @@ class ProductList {
       required this.productContent,
       required this.productDescription,
       required this.productImage,
+      required this.productCoverImage,
       required this.variants,
       required this.colorType,
       required this.sizeType});

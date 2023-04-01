@@ -19,7 +19,8 @@ class HomeProductListRow extends StatelessWidget {
         productImage: [],
         variants: [],
         colorType: [],
-        sizeType: []);
+        sizeType: [],
+        productCoverImage: []);
   });
 
   Widget _buildCategoryList(String category) {

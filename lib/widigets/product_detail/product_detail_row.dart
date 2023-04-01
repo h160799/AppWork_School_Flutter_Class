@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_programe_johnny/widigets/product_detail/product_content.dart';
+import 'package:flutter_programe_johnny/widigets/product_detail/product_image_carousel.dart';
 
 import '../../data/product_data.dart';
 
@@ -99,6 +100,11 @@ class _ProductDetailRowState extends State<ProductDetailRow> {
             'S',
             'M',
             'L'
+          ],
+          productCoverImage: [
+            const AssetImage('assets/images/flowers_2.png'),
+            const AssetImage('assets/images/flowers_3.png'),
+            const AssetImage('assets/images/flowers_4.png')
           ]);
     }
 
@@ -114,15 +120,8 @@ class _ProductDetailRowState extends State<ProductDetailRow> {
                 shrinkWrap: true,
                 children: [
                   const SizedBox(height: 40),
-                  Center(
-                    child: Image(
-                      image: productList!.coverImage,
-                      width: 400,
-                      height: 500,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  ProductContent(productListInfo: productList)
+                  ProductImageCarousel(productListInfo: productList!),
+                  ProductContent(productListInfo: productList),
                 ]);
           } else {
             //snapshot.hasError

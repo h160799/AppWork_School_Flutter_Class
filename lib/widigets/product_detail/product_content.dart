@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_programe_johnny/data/product_data.dart';
-import 'package:flutter_programe_johnny/pages/home_page.dart';
 
 class ProductContent extends StatefulWidget {
   final ProductList productListInfo;

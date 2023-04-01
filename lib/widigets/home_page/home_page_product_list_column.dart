@@ -25,7 +25,8 @@ class _HomeProductListColumnState extends State<HomeProductListColumn> {
         productImage: [],
         variants: [],
         colorType: [],
-        sizeType: []);
+        sizeType: [],
+        productCoverImage: []);
   });
 
   final Map<String, bool> _isVisibleMap = {
