@@ -40,7 +40,99 @@ class _ProductContentState extends State<ProductContent> {
       }
     }
 
-   
+    Future<void> showAlert(BuildContext context) {
+      return showDialog<void>(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Center(
+              child:
+                  Text('已加入購物車', style: TextStyle(fontWeight: FontWeight.bold)),
+            ),
+            content: SizedBox(
+              width: 200.0,
+              height: 100.0,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(right: 15.0),
+                    child: Image(
+                      image: _productListInfo.coverImage,
+                      width: 90,
+                      height: 100,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${_productListInfo.productName} \nNT\$ ${_productListInfo.price}\n尺寸:$selectedSize',
+                        style: const TextStyle(
+                            fontSize: 12.0, fontWeight: FontWeight.bold),
+                      ),
+                      Row(children: [
+                        const Text(
+                          '顏色:',
+                          style: TextStyle(
+                              fontSize: 12.0, fontWeight: FontWeight.bold),
+                        ),
+                        Container(
+                          margin:
+                              const EdgeInsets.only(right: 10.0, left: 10.0),
+                          width: 16.0,
+                          height: 16.0,
+                          decoration: BoxDecoration(
+                            color: Color(selectedColor),
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                      ]),
+                      Text(
+                        '數量:$_counter',
+                        style: const TextStyle(
+                            fontSize: 12.0, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text(
+                  '查看購物車',
+                  style: TextStyle(
+                    color: Colors.blueGrey,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 20.0,
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text(
+                  '繼續購物',
+                  style: TextStyle(
+                    color: Colors.blueGrey,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    }
 
     return Expanded(
       child: Center(
@@ -291,7 +383,7 @@ class _ProductContentState extends State<ProductContent> {
                       if (stockEnough == true) {
                         null;
                       } else {
-                       
+                        showAlert(context);
                       }
                     },
                     child: Container(
@@ -317,7 +409,42 @@ class _ProductContentState extends State<ProductContent> {
                           fontSize: 15.0, fontWeight: FontWeight.w500),
                     ),
                   ),
-                  
+                  Row(
+                    children: [
+                      ShaderMask(
+                        shaderCallback: (Rect bounds) {
+                          //Rect bounds 表示了漸變的舉行區域，通常情况下，该區域应该是子widget的邊界框（即子widget的寬度和高度）。
+                          return const LinearGradient(
+                            //線性漸變 widget
+                            colors: [
+                              Colors.deepPurple,
+                              Colors.blue,
+                              Colors.green
+                            ],
+                            stops: [0.0, 0.6, 1.0],
+                            begin: Alignment.topLeft,
+                            end: Alignment.topRight,
+                            tileMode: TileMode.clamp, //如何平鋪漸變
+                          ).createShader(bounds);
+                        },
+                        child: const Text(
+                          '細部說明',
+                          style: TextStyle(
+                            fontSize: 17.0,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 20.0,
+                      ),
+                      Container(
+                        width: 310,
+                        height: 1.5,
+                        color: Colors.grey[500],
+                      ),
+                    ],
+                  ),
                   Container(
                     margin: const EdgeInsets.only(top: 10.0),
                     width: 400,
