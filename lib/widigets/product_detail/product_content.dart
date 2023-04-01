@@ -146,7 +146,7 @@ class _ProductContentState extends State<ProductContent> {
       child: Center(
         child: SizedBox(
           width: 400.0,
-          height: MediaQuery.of(context).size.height * 2.2,
+          height: 490.0,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -404,77 +404,14 @@ class _ProductContentState extends State<ProductContent> {
                   ),
                   Container(
                     width: 400,
-                    margin: const EdgeInsets.only(top: 10.0, bottom: 20.0),
+                    margin: const EdgeInsets.only(top: 10.0),
                     child: Text(
                       _productListInfo.productContent,
                       style: const TextStyle(
                           fontSize: 15.0, fontWeight: FontWeight.w500),
                     ),
                   ),
-                  Row(
-                    children: [
-                      ShaderMask(
-                        shaderCallback: (Rect bounds) {
-                          //Rect bounds 表示了漸變的舉行區域，通常情况下，该區域应该是子widget的邊界框（即子widget的寬度和高度）。
-                          return const LinearGradient(
-                            //線性漸變 widget
-                            colors: [
-                              Colors.deepPurple,
-                              Colors.blue,
-                              Colors.green
-                            ],
-                            stops: [0.0, 0.6, 1.0],
-                            begin: Alignment.topLeft,
-                            end: Alignment.topRight,
-                            tileMode: TileMode.clamp, //如何平鋪漸變
-                          ).createShader(bounds);
-                        },
-                        child: const Text(
-                          '細部說明',
-                          style: TextStyle(
-                            fontSize: 17.0,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 20.0,
-                      ),
-                      Container(
-                        width: 310,
-                        height: 1.5,
-                        color: Colors.grey[500],
-                      ),
-                    ],
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 10.0),
-                    width: 400,
-                    child: Text(
-                      _productListInfo.productDescription,
-                      style: const TextStyle(fontSize: 12.0, height: 0.7),
-                    ),
-                  ),
-                  Flexible(
-                    child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: _productListInfo.productImage.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          margin: const EdgeInsets.only(top: 20.0),
-                          width: 400,
-                          child: Image(
-                            image: _productListInfo.productImage[index].image,
-                            width: 400,
-                            height: 200,
-                            fit: BoxFit.cover,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+                 
                 ],
               )),
             ],

@@ -47,7 +47,7 @@ class _ProductDetailPage extends StatelessWidget {
     if (screenWidth < minScreenWidth) {
       return ProductDetailRow( productId: productId,);
     } else {
-      return const ProductDetailColumn();
+      return ProductDetailColumn(productId: productId,);
     }
   }
 }
