@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                width: 120.0, // 设置图像的宽度
+                width: 120.0, // 設置圖像寬度
                 child: Image.asset(
                   'assets/images/stylish_Logo.png',
                   fit: BoxFit.fitWidth,
