@@ -308,7 +308,44 @@ class _ProductContentState extends State<ProductContent> {
                       ),
                     ),
                   ),
+                  Container(
+                    width: 400,
+                    margin: const EdgeInsets.only(top: 10.0, bottom: 20.0),
+                    child: Text(
+                      _productListInfo.productContent,
+                      style: const TextStyle(
+                          fontSize: 15.0, fontWeight: FontWeight.w500),
+                    ),
+                  ),
                   
+                  Container(
+                    margin: const EdgeInsets.only(top: 10.0),
+                    width: 400,
+                    child: Text(
+                      _productListInfo.productDescription,
+                      style: const TextStyle(fontSize: 12.0, height: 0.7),
+                    ),
+                  ),
+                  Flexible(
+                    child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: _productListInfo.productImage.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: const EdgeInsets.only(top: 20.0),
+                          width: 400,
+                          child: Image(
+                            image: _productListInfo.productImage[index].image,
+                            width: 400,
+                            height: 200,
+                            fit: BoxFit.cover,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               )),
             ],
