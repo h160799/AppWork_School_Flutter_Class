@@ -30,12 +30,21 @@ class _ProductContentState extends State<ProductContent> {
       return 1; // 如果沒有找到匹配的商品，則返回0
     }
 
-    void checkStock(String size, int color) {
+    void setColorAndSizeCheckStock(String size, int color) {
       if (getStock(size, color) > 0) {
         stockEnough = false;
+        _counter = 0;
       } else {
         stockEnough = true;
         _counter = 0;
+      }
+    }
+
+    void setCountCheckStock(String size, int color) {
+      if (getStock(size, color) < _counter) {
+        stockEnough = true;
+      } else {
+        stockEnough = false;
       }
     }
 
@@ -211,7 +220,8 @@ class _ProductContentState extends State<ProductContent> {
                                   selectedColor =
                                       _productListInfo.colorType[index];
                                 });
-                                checkStock(selectedSize, selectedColor);
+                                setColorAndSizeCheckStock(
+                                    selectedSize, selectedColor);
                               },
                               child: Container(
                                 margin: const EdgeInsets.only(right: 10.0),
@@ -267,8 +277,8 @@ class _ProductContentState extends State<ProductContent> {
                                   selectedSize =
                                       _productListInfo.sizeType[index];
                                 });
-
-                                checkStock(selectedSize, selectedColor);
+                                setColorAndSizeCheckStock(
+                                    selectedSize, selectedColor);
                               },
                               child: Container(
                                 margin: const EdgeInsets.only(right: 10.0),
@@ -323,15 +333,10 @@ class _ProductContentState extends State<ProductContent> {
                                 size: 35, color: Colors.black),
                             child: IconButton(
                               onPressed: () {
-                                if (stockEnough == true ||
-                                    selectedColor == 0 ||
-                                    selectedSize == '') {
-                                  null;
-                                } else {
-                                  setState(() {
-                                    _counter++;
-                                  });
-                                }
+                                setState(() {
+                                  _counter++;
+                                });
+                                setCountCheckStock(selectedSize, selectedColor);
                               },
                               icon: const Icon(Icons.add_box),
                             ),
@@ -348,17 +353,12 @@ class _ProductContentState extends State<ProductContent> {
                                 size: 35, color: Colors.black),
                             child: IconButton(
                               onPressed: () {
-                                if (stockEnough == true ||
-                                    selectedColor == 0 ||
-                                    selectedSize == '') {
-                                  null;
-                                } else {
-                                  setState(() {
-                                    if (_counter > 0) {
-                                      _counter--;
-                                    }
-                                  });
-                                }
+                                setState(() {
+                                  if (_counter > 0) {
+                                    _counter--;
+                                  }
+                                });
+                                setCountCheckStock(selectedSize, selectedColor);
                               },
                               icon: const Icon(Icons.indeterminate_check_box),
                             ),
@@ -379,7 +379,10 @@ class _ProductContentState extends State<ProductContent> {
                   ),
                   InkWell(
                     onTap: () {
-                      if (stockEnough == true) {
+                      if (stockEnough == true ||
+                          selectedColor == 0 ||
+                          selectedSize == ''||
+                          _counter == 0) {
                         null;
                       } else {
                         showAlert(context);
