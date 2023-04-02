@@ -20,7 +20,7 @@ class _ProductImageCarouselState extends State<ProductImageCarousel> {
 
     return CarouselSlider(
       options: CarouselOptions(
-        height: 500,
+        height: 470,
         aspectRatio: 16 / 9,
         viewportFraction: 0.8,
         initialPage: 0,
@@ -40,8 +40,8 @@ class _ProductImageCarouselState extends State<ProductImageCarousel> {
   return Builder(
     builder: (BuildContext context) {
       return Container(
-        width: 400,
-        height: 500,
+        width: 350,
+        height: 470,
         margin: const EdgeInsets.symmetric(horizontal: 5.0),
         child: Image(
           image:image,

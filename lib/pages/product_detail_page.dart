@@ -4,10 +4,11 @@ import 'package:flutter_programe_johnny/widigets/product_detail/product_detail_r
 import '../widigets/product_detail/product_detail_column.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  
-  String productId='';
+  String productId = '';
 
-  ProductDetailPage({Key? key,  this.productId = '' }) : super(key: key);
+  ProductDetailPage({Key? key, this.productId = ''}) : super(key: key);
+
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +29,16 @@ class ProductDetailPage extends StatelessWidget {
           iconTheme: const IconThemeData(color: Colors.black),
         ),
       ),
-      body: _ProductDetailPage(productId: productId,),
+      body: _ProductDetailPage(productId: productId),
     );
   }
 }
 
 class _ProductDetailPage extends StatelessWidget {
-  
-  String productId='';
+  String productId = '';
+  final ScrollController _scrollController = ScrollController();
 
-  _ProductDetailPage({Key? key, this.productId = '' }) : super(key: key);
+  _ProductDetailPage({Key? key, this.productId = ''}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +46,34 @@ class _ProductDetailPage extends StatelessWidget {
     const double minScreenWidth = 800.0; // 設定最小寬度值
 
     if (screenWidth < minScreenWidth) {
-      return ProductDetailRow( productId: productId,);
+      return ProductDetailRow(
+        productId: productId,
+      );
     } else {
-      return ProductDetailColumn(productId: productId,);
+      return Scaffold(
+        body: SingleChildScrollView(
+          controller:
+              _scrollController, // associate the controller with the scrollable widget
+          physics: AlwaysScrollableScrollPhysics(),    
+          child: ProductDetailColumn(
+            productId: productId,
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            // Scroll to the top when the button is pressed
+            _scrollController.animateTo(
+              0,
+              duration: Duration(milliseconds: 500),
+              curve: Curves.easeInOut,
+            );
+          },
+          tooltip: 'Go to top',
+          backgroundColor: Color.fromARGB(255, 232, 228, 228).withOpacity(0.3),
+          foregroundColor: Colors.white,
+          child: const Icon(Icons.arrow_upward),
+        ),
+      );
     }
   }
 }

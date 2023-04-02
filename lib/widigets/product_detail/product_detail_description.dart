@@ -19,9 +19,12 @@ class ProductDetailDescription extends StatelessWidget {
         child: Center(
       child: SizedBox(
         width: _width,
-        height: 160,
+        height: 200,
         child: Flexible(
           child: Column(children: [
+            const SizedBox(
+              height: 20.0,
+            ),
             Row(
               children: [
                 ShaderMask(
@@ -55,11 +58,13 @@ class ProductDetailDescription extends StatelessWidget {
               ],
             ),
             Container(
-              margin: const EdgeInsets.only(top: 10.0),
+              margin: const EdgeInsets.only(top: 10.0,bottom: 20),
               width: _width,
               child: Text(
                 _productListInfo.productDescription,
-                style: const TextStyle(fontSize: 12.0, height: 0.7),
+                style: const TextStyle(
+                  fontSize: 12.0,
+                ),
               ),
             ),
           ]),

@@ -32,14 +32,8 @@ class _ProductDetailRowState extends State<ProductDetailRow> {
           price: 323,
           productContent:
               '實品顏色依單品照為主\n棉 100%\n厚薄：薄\n彈性：無\n素材產地 / 日本\n加工產地 / 中國 ',
-          productDescription: '''輕盈且耐久性高的「極輕羽絨」設計。衣長可遮蓋腰部一帶，充分保暖。
-        \n・採用輕盈的10丹尼材質製成。
-        \n・添加可彈開小雨程度水份的耐久防潑水機能。
-        \n・內裡布料為防靜電加工。
-        \n・蓬鬆度750*的特級羽絨材質，輕盈溫暖。*依據IDF8法所測定之數值。
-        \n・可攜帶收納的款式，可輕巧摺疊攜帶。
-        \n・採用具運動風格且相當耐用的羅紋防撕裂材質製成。
-        \n・絎縫幅度稍寬，展現羽絨衣特有的蓬鬆感，營造都會印象。''',
+          productDescription:
+              '''輕盈且耐久性高的「極輕羽絨」設計。衣長可遮蓋腰部一帶，充分保暖。採用輕盈的10丹尼材質製成。添加可彈開小雨程度水份的耐久防潑水機能。內裡布料為防靜電加工。蓬鬆度750*的特級羽絨材質，輕盈溫暖。*依據IDF8法所測定之數值。可攜帶收納的款式，可輕巧摺疊攜帶。採用具運動風格且相當耐用的羅紋防撕裂材質製成。絎縫幅度稍寬，展現羽絨衣特有的蓬鬆感，營造都會印象。''',
           productImage: [
             Image.asset('assets/images/flowers.png'),
             Image.asset('assets/images/flowers_5.png'),
@@ -124,10 +118,15 @@ class _ProductDetailRowState extends State<ProductDetailRow> {
                   const SizedBox(height: 40),
                   ProductImageCarousel(productListInfo: productList!),
                   ProductContent(productListInfo: productList),
-                  
-                  ProductDetailDescription(productListInfo: productList,width: 400.0,),
-                  ProductDetailBottomImage(productListInfo: productList,width: 400.0,height: 200.0,)
-                  
+                  ProductDetailDescription(
+                    productListInfo: productList,
+                    width: 350.0,
+                  ),
+                  ProductDetailBottomImage(
+                    productListInfo: productList,
+                    width: 350.0,
+                    height: 170.0,
+                  )
                 ]);
           } else {
             //snapshot.hasError

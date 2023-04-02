@@ -145,14 +145,12 @@ class _ProductContentState extends State<ProductContent> {
     return Expanded(
       child: Center(
         child: SizedBox(
-          width: 400.0,
-          height: 490.0,
+          width: 350.0,
+          height: 470.0,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 20.0,
-              ),
               Text(
                 _productListInfo.productName,
                 style: const TextStyle(
@@ -182,7 +180,7 @@ class _ProductContentState extends State<ProductContent> {
                 height: 8.0,
               ),
               Container(
-                width: 400,
+                width: 350,
                 height: 2.0,
                 color: Colors.grey[200],
               ),
@@ -206,7 +204,7 @@ class _ProductContentState extends State<ProductContent> {
                         color: Colors.grey[200],
                       ),
                       SizedBox(
-                        width: 320,
+                        width: 270,
                         height: 20,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
@@ -263,7 +261,7 @@ class _ProductContentState extends State<ProductContent> {
                         color: Colors.grey[200],
                       ),
                       SizedBox(
-                        width: 320,
+                        width: 270,
                         height: 17,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
@@ -381,7 +379,7 @@ class _ProductContentState extends State<ProductContent> {
                     onTap: () {
                       if (stockEnough == true ||
                           selectedColor == 0 ||
-                          selectedSize == ''||
+                          selectedSize == '' ||
                           _counter == 0) {
                         null;
                       } else {
@@ -403,15 +401,16 @@ class _ProductContentState extends State<ProductContent> {
                     ),
                   ),
                   Container(
-                    width: 400,
+                    width: 350,
                     margin: const EdgeInsets.only(top: 10.0),
                     child: Text(
                       _productListInfo.productContent,
                       style: const TextStyle(
-                          fontSize: 15.0, fontWeight: FontWeight.w500),
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
-                 
                 ],
               )),
             ],

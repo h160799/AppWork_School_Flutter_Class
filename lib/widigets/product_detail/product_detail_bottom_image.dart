@@ -30,10 +30,10 @@ class ProductDetailBottomImage extends StatelessWidget {
             itemBuilder: (context, index) {
               return Container(
                 margin: const EdgeInsets.only(top: 10.0,bottom: 10.0),
-                width: 400,
+                width: _width,
                 child: Image(
                   image: _productListInfo.productImage[index].image,
-                  width: 400,
+                  width: _width,
                   height: _height,
                   fit: BoxFit.cover,
                 ),
