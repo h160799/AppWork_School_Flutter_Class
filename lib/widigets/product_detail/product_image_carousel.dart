@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-
 import '../../data/product_data.dart';
 
 class ProductImageCarousel extends StatefulWidget {
@@ -37,20 +36,20 @@ class _ProductImageCarouselState extends State<ProductImageCarousel> {
         scrollDirection: Axis.horizontal,
       ),
       items: _productListInfo.productCoverImage.map((image) {
-  return Builder(
-    builder: (BuildContext context) {
-      return Container(
-        width: 350,
-        height: 470,
-        margin: const EdgeInsets.symmetric(horizontal: 5.0),
-        child: Image(
-          image:image,
-          fit: BoxFit.cover,
-        ),
-      );
-    },
-  );
-}).toList(),
+        return Builder(
+          builder: (BuildContext context) {
+            return Container(
+              width: 350,
+              height: 470,
+              margin: const EdgeInsets.symmetric(horizontal: 5.0),
+              child: Image(
+                image: image,
+                fit: BoxFit.cover,
+              ),
+            );
+          },
+        );
+      }).toList(),
     );
   }
 }

@@ -8,8 +8,6 @@ class ProductDetailPage extends StatelessWidget {
 
   ProductDetailPage({Key? key, this.productId = ''}) : super(key: key);
 
-  final ScrollController _scrollController = ScrollController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +52,7 @@ class _ProductDetailPage extends StatelessWidget {
         body: SingleChildScrollView(
           controller:
               _scrollController, // associate the controller with the scrollable widget
-          physics: AlwaysScrollableScrollPhysics(),    
+          physics: const AlwaysScrollableScrollPhysics(),
           child: ProductDetailColumn(
             productId: productId,
           ),
@@ -64,7 +62,7 @@ class _ProductDetailPage extends StatelessWidget {
             // Scroll to the top when the button is pressed
             _scrollController.animateTo(
               0,
-              duration: Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: 500),
               curve: Curves.easeInOut,
             );
           },

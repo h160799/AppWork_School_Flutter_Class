@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../data/product_data.dart';
 
 class ProductDetailDescription extends StatelessWidget {
@@ -58,7 +57,7 @@ class ProductDetailDescription extends StatelessWidget {
               ],
             ),
             Container(
-              margin: const EdgeInsets.only(top: 10.0,bottom: 20),
+              margin: const EdgeInsets.only(top: 10.0, bottom: 20),
               width: _width,
               child: Text(
                 _productListInfo.productDescription,

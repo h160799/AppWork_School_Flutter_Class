@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_programe_johnny/widigets/product_detail/product_content.dart';
 import 'package:flutter_programe_johnny/widigets/product_detail/product_detail_bottom_image.dart';
 import 'package:flutter_programe_johnny/widigets/product_detail/product_detail_description.dart';
-import 'package:flutter_programe_johnny/widigets/product_detail/product_image_carousel.dart';
 
 import '../../data/product_data.dart';
 
