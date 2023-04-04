@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_programe_johnny/data/product_data.dart';
+import 'package:flutter_programe_johnny/main.dart';
+import 'package:flutter_programe_johnny/widigets/home_page/home_page_product_list_column.dart';
+
+import '../../pages/home_page.dart';
 
 class ProductContent extends StatefulWidget {
   final ProductList productListInfo;
@@ -126,7 +130,12 @@ class _ProductContentState extends State<ProductContent> {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MyApp(),
+                    ),
+                  );
                 },
                 child: const Text(
                   '繼續購物',

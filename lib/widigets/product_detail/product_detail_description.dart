@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import '../../data/product_data.dart';
 
 class ProductDetailDescription extends StatelessWidget {
   final ProductList productListInfo;
-  final double width;
 
-  const ProductDetailDescription(
-      {Key? key, required this.productListInfo, required this.width})
-      : super(key: key);
+  const ProductDetailDescription({
+    Key? key,
+    required this.productListInfo,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final _productListInfo = productListInfo;
-    final _width = width;
+
+    bool isLargeScreen = MediaQuery.of(context).size.width > 800.0;
 
     return Expanded(
         child: Center(
       child: SizedBox(
-        width: _width,
+        width: isLargeScreen ? 700.0 : 350.0,
         height: 200,
         child: Flexible(
           child: Column(children: [
@@ -50,7 +52,7 @@ class ProductDetailDescription extends StatelessWidget {
                   width: 20.0,
                 ),
                 Container(
-                  width: _width - 90.0,
+                  width: isLargeScreen ? 610.0 : 260.0,
                   height: 1.5,
                   color: Colors.grey[500],
                 ),
@@ -58,7 +60,7 @@ class ProductDetailDescription extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(top: 10.0, bottom: 20),
-              width: _width,
+              width: isLargeScreen ? 700.0 : 350.0,
               child: Text(
                 _productListInfo.productDescription,
                 style: const TextStyle(

@@ -141,15 +141,8 @@ class _ProductDetailColumnState extends State<ProductDetailColumn> {
                       ],
                     ),
                   ),
-                  ProductDetailDescription(
-                    productListInfo: productList,
-                    width: 700.0,
-                  ),
-                  ProductDetailBottomImage(
-                    productListInfo: productList,
-                    width: 700.0,
-                    height: 440.0,
-                  )
+                  ProductDetailDescription(productListInfo: productList, ),
+                  ProductDetailBottomImage( productListInfo: productList,)
                 ]);
           } else {
             //snapshot.hasError

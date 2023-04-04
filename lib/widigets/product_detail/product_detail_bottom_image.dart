@@ -3,25 +3,19 @@ import '../../data/product_data.dart';
 
 class ProductDetailBottomImage extends StatelessWidget {
   final ProductList productListInfo;
-  final double width;
-  final double height;
 
-  const ProductDetailBottomImage(
-      {Key? key,
-      required this.productListInfo,
-      required this.width,
-      required this.height})
-      : super(key: key);
+  const ProductDetailBottomImage({
+    Key? key,
+    required this.productListInfo,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final _productListInfo = productListInfo;
-    final _width = width;
-    final _height = height;
+    bool isLargeScreen = MediaQuery.of(context).size.width > 800.0;
 
     return Center(
       child: SizedBox(
-        width: _width,
+        width: isLargeScreen ? 700.0 : 350.0,
         child: Flexible(
           child: ListView.builder(
             scrollDirection: Axis.vertical,
@@ -31,11 +25,11 @@ class ProductDetailBottomImage extends StatelessWidget {
             itemBuilder: (context, index) {
               return Container(
                 margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                width: _width,
+                width: isLargeScreen ? 700.0 : 350.0,
                 child: Image(
                   image: _productListInfo.productImage[index].image,
-                  width: _width,
-                  height: _height,
+                  width: isLargeScreen ? 700.0 : 350.0,
+                  height: isLargeScreen ? 440.0 : 170.0,
                   fit: BoxFit.cover,
                 ),
               );

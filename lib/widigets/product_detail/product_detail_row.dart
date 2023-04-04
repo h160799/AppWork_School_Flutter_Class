@@ -117,15 +117,8 @@ class _ProductDetailRowState extends State<ProductDetailRow> {
                   const SizedBox(height: 40),
                   ProductImageCarousel(productListInfo: productList!),
                   ProductContent(productListInfo: productList),
-                  ProductDetailDescription(
-                    productListInfo: productList,
-                    width: 350.0,
-                  ),
-                  ProductDetailBottomImage(
-                    productListInfo: productList,
-                    width: 350.0,
-                    height: 170.0,
-                  )
+                  ProductDetailDescription( productListInfo: productList,),
+                  ProductDetailBottomImage(productListInfo: productList, )
                 ]);
           } else {
             //snapshot.hasError
