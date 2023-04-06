@@ -5,16 +5,16 @@ import 'package:flutter_programe_johnny/widigets/product_detail/product_detail_d
 import 'package:flutter_programe_johnny/widigets/product_detail/product_image_carousel.dart';
 import '../../data/product_data.dart';
 
-class ProductDetailRow extends StatefulWidget {
+class ProductDetailSmall extends StatefulWidget {
   final String productId;
 
-  const ProductDetailRow({super.key, required this.productId});
+  const ProductDetailSmall({super.key, required this.productId});
 
   @override
-  State<ProductDetailRow> createState() => _ProductDetailRowState();
+  State<ProductDetailSmall> createState() => _ProductDetailSmallState();
 }
 
-class _ProductDetailRowState extends State<ProductDetailRow> {
+class _ProductDetailSmallState extends State<ProductDetailSmall> {
   @override
   Widget build(BuildContext context) {
     final _productId = widget.productId;

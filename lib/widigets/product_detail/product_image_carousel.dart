@@ -20,8 +20,8 @@ class _ProductImageCarouselState extends State<ProductImageCarousel> {
     return CarouselSlider(
       options: CarouselOptions(
         height: 470,
-        aspectRatio: 16 / 9,
-        viewportFraction: 0.8,
+        aspectRatio: 16 / 8,
+        viewportFraction: 1.0,
         initialPage: 0,
         enableInfiniteScroll: true,
         reverse: false,

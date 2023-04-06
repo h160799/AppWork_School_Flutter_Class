@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_programe_johnny/widigets/product_detail/product_detail_row.dart';
+import 'package:flutter_programe_johnny/widigets/product_detail/product_detail_small.dart';
 
-import '../widigets/product_detail/product_detail_column.dart';
+import '../widigets/product_detail/product_detail_big.dart';
 
 class ProductDetailPage extends StatelessWidget {
   String productId = '';
@@ -27,7 +27,13 @@ class ProductDetailPage extends StatelessWidget {
           iconTheme: const IconThemeData(color: Colors.black),
         ),
       ),
-      body: _ProductDetailPage(productId: productId),
+      body: WillPopScope(
+        onWillPop: () async {
+          // 添加您返回鍵事件處理邏輯
+          return true; // 如果要阻止返回事件，則返回 false，否則返回 true
+        },
+        child: _ProductDetailPage(productId: productId),
+      ),
     );
   }
 }
@@ -44,7 +50,7 @@ class _ProductDetailPage extends StatelessWidget {
     const double minScreenWidth = 800.0; // 設定最小寬度值
 
     if (screenWidth < minScreenWidth) {
-      return ProductDetailRow(
+      return ProductDetailSmall(
         productId: productId,
       );
     } else {
@@ -53,7 +59,7 @@ class _ProductDetailPage extends StatelessWidget {
           controller:
               _scrollController, // associate the controller with the scrollable widget
           physics: const AlwaysScrollableScrollPhysics(),
-          child: ProductDetailColumn(
+          child: ProductDetailBig(
             productId: productId,
           ),
         ),
@@ -67,7 +73,8 @@ class _ProductDetailPage extends StatelessWidget {
             );
           },
           tooltip: 'Go to top',
-          backgroundColor: Color.fromARGB(255, 232, 228, 228).withOpacity(0.3),
+          backgroundColor:
+              const Color.fromARGB(255, 232, 228, 228).withOpacity(0.3),
           foregroundColor: Colors.white,
           child: const Icon(Icons.arrow_upward),
         ),

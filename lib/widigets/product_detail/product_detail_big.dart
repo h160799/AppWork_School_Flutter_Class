@@ -5,16 +5,16 @@ import 'package:flutter_programe_johnny/widigets/product_detail/product_detail_d
 
 import '../../data/product_data.dart';
 
-class ProductDetailColumn extends StatefulWidget {
+class ProductDetailBig extends StatefulWidget {
   final String productId;
 
-  const ProductDetailColumn({super.key, required this.productId});
+  const ProductDetailBig({super.key, required this.productId});
 
   @override
-  State<ProductDetailColumn> createState() => _ProductDetailColumnState();
+  State<ProductDetailBig> createState() => _ProductDetailBigState();
 }
 
-class _ProductDetailColumnState extends State<ProductDetailColumn> {
+class _ProductDetailBigState extends State<ProductDetailBig> {
   @override
   Widget build(BuildContext context) {
     final _productId = widget.productId;
