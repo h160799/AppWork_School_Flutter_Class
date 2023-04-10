@@ -2,21 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_programe_johnny/data/product_data.dart';
 
-class GetProductInfoBloc {
-  final _productInfoController = StreamController<ProductList>();
-
-  Stream<ProductList> get productInfoStream => _productInfoController.stream;
-
-  late ProductList result;
-
-//異步操作
-  void fetchProductInfo(String productId) async {
-    result = getProductInfo(productId);
-    _productInfoController.sink.add(result);
-  }
+class GetProductInfoFunction {
 
 //拿取商品資訊的 function 主體 -- call API
-  ProductList getProductInfo(String useProductId) {
+  Future<ProductList> getProductInfo(String useProductId) async {
     return ProductList(
         productID: useProductId,
         productStyle: '女裝',
@@ -96,9 +85,5 @@ class GetProductInfoBloc {
           const AssetImage('assets/images/flowers_3.png'),
           const AssetImage('assets/images/flowers_4.png')
         ]);
-  }
-
-  void dispose() {
-    _productInfoController.close();
   }
 }

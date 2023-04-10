@@ -17,22 +17,17 @@ class ProductDetailBig extends StatefulWidget {
 class _ProductDetailBigState extends State<ProductDetailBig> {
 
 
-late GetProductInfoBloc _getProductInfoBloc;
+late final GetProductInfoFunction _getProductInfoFunction = GetProductInfoFunction();
 
-  @override
-  initState() {
-    super.initState();
-    _getProductInfoBloc = GetProductInfoBloc();
-    _getProductInfoBloc.fetchProductInfo(widget.productId);
-  }
+
 
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<ProductList>(
-      stream: _getProductInfoBloc.productInfoStream,
+    return FutureBuilder<ProductList>(
+      future: _getProductInfoFunction.getProductInfo(widget.productId),
       builder: (context, snapshot) {
-       if (snapshot.connectionState == ConnectionState.active) {
+       if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
             final ProductList productList = snapshot.data!;
             return ListView(
@@ -71,7 +66,6 @@ late GetProductInfoBloc _getProductInfoBloc;
                   ProductDetailBottomImage( productListInfo: productList,)
                 ]);
           } else {
-            _getProductInfoBloc.dispose();
             //snapshot.hasError
             return const Text('No data');
           }

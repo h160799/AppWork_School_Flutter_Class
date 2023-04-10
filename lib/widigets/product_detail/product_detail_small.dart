@@ -17,22 +17,18 @@ class ProductDetailSmall extends StatefulWidget {
 }
 
 class _ProductDetailSmallState extends State<ProductDetailSmall> {
-  late final GetProductInfoBloc _getProductInfoBloc;
-
-  @override
-  initState() {
-    super.initState();
-    _getProductInfoBloc = GetProductInfoBloc();
-    _getProductInfoBloc.fetchProductInfo(widget.productId);
-  }
+  late final GetProductInfoFunction _getProductInfoFunction = GetProductInfoFunction();
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<ProductList>(
-      stream: _getProductInfoBloc.productInfoStream,
-      // initialData: ,
+    return FutureBuilder<ProductList>(
+      future: _getProductInfoFunction.getProductInfo(widget.productId),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.active) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+
+          
+        } else {
           if (snapshot.hasData) {
             final ProductList productList = snapshot.data!;
             return ListView(
@@ -51,12 +47,9 @@ class _ProductDetailSmallState extends State<ProductDetailSmall> {
                   )
                 ]);
           } else {
-            _getProductInfoBloc.dispose();
             //snapshot.hasError
             return const Text('No data');
           }
-        } else {
-          return const CircularProgressIndicator();
         }
       },
     );
