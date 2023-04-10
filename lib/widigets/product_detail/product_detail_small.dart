@@ -19,16 +19,13 @@ class ProductDetailSmall extends StatefulWidget {
 class _ProductDetailSmallState extends State<ProductDetailSmall> {
   late final GetProductInfoFunction _getProductInfoFunction = GetProductInfoFunction();
 
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<ProductList>(
       future: _getProductInfoFunction.getProductInfo(widget.productId),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const CircularProgressIndicator();
-
-          
-        } else {
+        if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
             final ProductList productList = snapshot.data!;
             return ListView(
@@ -50,6 +47,8 @@ class _ProductDetailSmallState extends State<ProductDetailSmall> {
             //snapshot.hasError
             return const Text('No data');
           }
+        } else {
+          return const CircularProgressIndicator();
         }
       },
     );
