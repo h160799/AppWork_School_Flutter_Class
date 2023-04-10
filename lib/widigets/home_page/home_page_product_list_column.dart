@@ -21,7 +21,7 @@ class _HomeProductListColumnState extends State<HomeProductListColumn> {
         price: 323,
         productContent: '',
         productDescription: '',
-        productID: '',
+        productID: 'A12345678',
         productImage: [],
         variants: [],
         colorType: [],

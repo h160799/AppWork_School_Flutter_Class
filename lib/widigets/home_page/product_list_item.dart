@@ -14,7 +14,7 @@ class ProductListItem extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) =>ProductDetailPage(productId:'A12345678'),
+            builder: (context) =>ProductDetailPage(productId:item.productID),
           ),
         );
       },
