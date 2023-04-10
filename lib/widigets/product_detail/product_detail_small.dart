@@ -30,7 +30,7 @@ class _ProductDetailSmallState extends State<ProductDetailSmall> {
   Widget build(BuildContext context) {
     return StreamBuilder<ProductList>(
       stream: _getProductInfoBloc.productInfoStream,
-      initialData: _getProductInfoBloc.initProductList,
+      // initialData: ,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {

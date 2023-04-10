@@ -9,33 +9,6 @@ class GetProductInfoBloc {
 
   late ProductList result;
 
-late ProductList initProductList = ProductList(
-        productID: '',
-        productStyle: '',
-        coverImage: const AssetImage(
-          '',
-        ),
-        productName: '',
-        price: 0,
-        productContent: '',
-        productDescription:'',
-        productImage: [         
-        ],
-        variants: [
-        ],
-        colorType: [
-        ],
-        sizeType: [
-        ],
-        productCoverImage: [
-       
-        ]);
-
-
-
-
-
-
 //異步操作
   void fetchProductInfo(String productId) async {
     result = getProductInfo(productId);
