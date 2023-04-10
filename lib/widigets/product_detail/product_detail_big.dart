@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_programe_johnny/widigets/product_detail/product_content.dart';
 import 'package:flutter_programe_johnny/widigets/product_detail/product_detail_bottom_image.dart';
 import 'package:flutter_programe_johnny/widigets/product_detail/product_detail_description.dart';
+import 'package:provider/provider.dart';
 import '../../bloc/get_product_info_bloc.dart';
 import '../../data/product_data.dart';
 
@@ -15,26 +16,16 @@ class ProductDetailBig extends StatefulWidget {
 }
 
 class _ProductDetailBigState extends State<ProductDetailBig> {
-
-
-late GetProductInfoBloc _getProductInfoBloc;
-
-  @override
-  initState() {
-    super.initState();
-    _getProductInfoBloc = GetProductInfoBloc();
-    _getProductInfoBloc.fetchProductInfo(widget.productId);
-  }
-
-
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<ProductList>(
-      stream: _getProductInfoBloc.productInfoStream,
-      builder: (context, snapshot) {
-       if (snapshot.connectionState == ConnectionState.active) {
-          if (snapshot.hasData) {
-            final ProductList productList = snapshot.data!;
+    return ChangeNotifierProvider(
+      create: (_) => ProductInfoProvider(),
+      child: Consumer<ProductInfoProvider>(
+        builder: (context, productInfoProvider, _) {
+          productInfoProvider.fetchProductInfo(widget.productId);
+          final productInfo = productInfoProvider.result;
+
+          if (productInfo != null) {
             return ListView(
                 physics: const AlwaysScrollableScrollPhysics(
                     parent: BouncingScrollPhysics()),
@@ -52,7 +43,7 @@ late GetProductInfoBloc _getProductInfoBloc;
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Image(
-                                image: productList!.coverImage,
+                                image: productInfo.coverImage,
                                 width: 350.0,
                                 height: 470.0,
                                 fit: BoxFit.cover,
@@ -60,25 +51,25 @@ late GetProductInfoBloc _getProductInfoBloc;
                               const SizedBox(
                                 width: 20.0,
                               ),
-                              ProductContent(productListInfo: productList),
+                              ProductContent(productListInfo: productInfo),
                             ],
                           ),
                         ),
                       ],
                     ),
                   ),
-                  ProductDetailDescription(productListInfo: productList, ),
-                  ProductDetailBottomImage( productListInfo: productList,)
+                  ProductDetailDescription(
+                    productListInfo: productInfo,
+                  ),
+                  ProductDetailBottomImage(
+                    productListInfo: productInfo,
+                  )
                 ]);
           } else {
-            _getProductInfoBloc.dispose();
-            //snapshot.hasError
-            return const Text('No data');
+            return const CircularProgressIndicator();
           }
-        } else {
-          return const CircularProgressIndicator();
-        }
-      },
+        },
+      ),
     );
   }
 }
