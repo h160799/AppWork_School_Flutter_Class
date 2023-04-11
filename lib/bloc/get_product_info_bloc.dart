@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_programe_johnny/data/product_data.dart';
 
-class GetProductInfoBloc {
+class GetProductInfoBloc  {
   final _productInfoController = StreamController<ProductList>();
 
   Stream<ProductList> get productInfoStream => _productInfoController.stream;

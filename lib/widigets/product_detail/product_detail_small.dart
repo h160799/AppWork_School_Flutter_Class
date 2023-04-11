@@ -24,7 +24,7 @@ class _ProductDetailSmallState extends State<ProductDetailSmall> {
     super.initState();
     _getProductInfoBloc = GetProductInfoBloc();
     _getProductInfoBloc.fetchProductInfo(widget.productId);
-  }
+  } 
 
   @override
   Widget build(BuildContext context) {

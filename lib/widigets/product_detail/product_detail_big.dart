@@ -52,7 +52,7 @@ late GetProductInfoBloc _getProductInfoBloc;
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Image(
-                                image: productList!.coverImage,
+                                image: productList.coverImage,
                                 width: 350.0,
                                 height: 470.0,
                                 fit: BoxFit.cover,
