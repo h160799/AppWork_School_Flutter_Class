@@ -19,13 +19,14 @@ class ProductDetailSmall extends StatefulWidget {
 class _ProductDetailSmallState extends State<ProductDetailSmall> {
   late final GetProductInfoFunction _getProductInfoFunction = GetProductInfoFunction();
 
+  
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<ProductList>(
       future: _getProductInfoFunction.getProductInfo(widget.productId),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.active) {
+       if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
             final ProductList productList = snapshot.data!;
             return ListView(
