@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import '../../data/product_data.dart';
 
 class ProductDetailDescription extends StatelessWidget {
-  final ProductList productListInfo;
+  final Product productDetail;
 
   const ProductDetailDescription({
     Key? key,
-    required this.productListInfo,
+    required this.productDetail,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final _productListInfo = productListInfo;
+    final _productDetail = productDetail;
 
     bool isLargeScreen = MediaQuery.of(context).size.width > 800.0;
 
@@ -61,8 +61,9 @@ class ProductDetailDescription extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: 10.0, bottom: 20),
               width: isLargeScreen ? 700.0 : 350.0,
-              child: Text(
-                _productListInfo.productDescription,
+              child: 
+              Text(
+                _productDetail.story,
                 style: const TextStyle(
                   fontSize: 12.0,
                 ),

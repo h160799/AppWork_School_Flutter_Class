@@ -1,11 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import '../../data/product_data.dart';
 
 class ProductImageCarousel extends StatefulWidget {
-  final ProductList productListInfo;
+  final Product productDetail;
 
-  const ProductImageCarousel({Key? key, required this.productListInfo})
+  const ProductImageCarousel({Key? key, required this.productDetail})
       : super(key: key);
 
   @override
@@ -15,7 +16,6 @@ class ProductImageCarousel extends StatefulWidget {
 class _ProductImageCarouselState extends State<ProductImageCarousel> {
   @override
   Widget build(BuildContext context) {
-    final _productListInfo = widget.productListInfo;
 
     return CarouselSlider(
       options: CarouselOptions(
@@ -35,17 +35,22 @@ class _ProductImageCarouselState extends State<ProductImageCarousel> {
         },
         scrollDirection: Axis.horizontal,
       ),
-      items: _productListInfo.productCoverImage.map((image) {
+      items: widget.productDetail.images.map((image) {
         return Builder(
           builder: (BuildContext context) {
             return Container(
               width: 350,
               height: 470,
               margin: const EdgeInsets.symmetric(horizontal: 5.0),
-              child: Image(
-                image: image,
-                fit: BoxFit.cover,
-              ),
+              child:CachedNetworkImage(
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
+                  imageUrl: image,
+                  placeholder: (context, url) =>
+                      const CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                ),
             );
           },
         );

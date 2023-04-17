@@ -13,7 +13,7 @@ class HomePageProductList extends StatelessWidget {
     if (screenWidth < minScreenWidth) {
       return const HomeProductListColumn();
     } else {
-      return HomeProductListRow();
+      return const HomeProductListRow();
     }
   }
 }

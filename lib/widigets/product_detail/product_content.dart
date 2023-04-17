@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_programe_johnny/data/product_data.dart';
 import 'package:flutter_programe_johnny/main.dart';
@@ -6,9 +7,9 @@ import 'package:flutter_programe_johnny/widigets/home_page/home_page_product_lis
 import '../../pages/home_page.dart';
 
 class ProductContent extends StatefulWidget {
-  final ProductList productListInfo;
+  final Product productDetail;
 
-  const ProductContent({Key? key, required this.productListInfo})
+  const ProductContent({Key? key, required this.productDetail})
       : super(key: key);
 
   @override
@@ -17,24 +18,24 @@ class ProductContent extends StatefulWidget {
 
 class _ProductContentState extends State<ProductContent> {
   int _counter = 0;
-  int selectedColor = 0;
+  String selectedColor = '';
   String selectedSize = '';
   bool stockEnough = false;
 
   @override
   Widget build(BuildContext context) {
-    final _productListInfo = widget.productListInfo;
+    final _productDetail = widget.productDetail;
 
-    int getStock(String size, int color) {
-      for (var variant in widget.productListInfo.variants) {
-        if (variant.productSize == size && variant.productColor == color) {
-          return variant.productStock;
+    int getStock(String size, String color) {
+      for (var variant in _productDetail.variants) {
+        if (variant.size == size && variant.colorCode == color) {
+          return variant.stock;
         }
       }
       return 1; // 如果沒有找到匹配的商品，則返回0
     }
 
-    void setColorAndSizeCheckStock(String size, int color) {
+    void setColorAndSizeCheckStock(String size, String color) {
       if (getStock(size, color) > 0) {
         stockEnough = false;
         _counter = 0;
@@ -44,7 +45,7 @@ class _ProductContentState extends State<ProductContent> {
       }
     }
 
-    void setCountCheckStock(String size, int color) {
+    void setCountCheckStock(String size, String color) {
       if (getStock(size, color) < _counter) {
         stockEnough = true;
       } else {
@@ -70,18 +71,22 @@ class _ProductContentState extends State<ProductContent> {
                 children: [
                   Container(
                     margin: const EdgeInsets.only(right: 15.0),
-                    child: Image(
-                      image: _productListInfo.coverImage,
+                    child: CachedNetworkImage(
                       width: 90,
                       height: 100,
                       fit: BoxFit.cover,
+                      imageUrl: _productDetail.mainImage,
+                      placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${_productListInfo.productName} \nNT\$ ${_productListInfo.price}\n尺寸:$selectedSize',
+                        '${_productDetail.title} \nNT\$ ${_productDetail.price}\n尺寸:$selectedSize',
                         style: const TextStyle(
                             fontSize: 12.0, fontWeight: FontWeight.bold),
                       ),
@@ -97,7 +102,7 @@ class _ProductContentState extends State<ProductContent> {
                           width: 16.0,
                           height: 16.0,
                           decoration: BoxDecoration(
-                            color: Color(selectedColor),
+                            color: Color(int.parse('0xFF$selectedColor')),
                             shape: BoxShape.circle,
                           ),
                         ),
@@ -161,7 +166,7 @@ class _ProductContentState extends State<ProductContent> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                _productListInfo.productName,
+                _productDetail.title,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 25.0,
@@ -171,7 +176,7 @@ class _ProductContentState extends State<ProductContent> {
                 height: 2.0,
               ),
               Text(
-                _productListInfo.productID,
+                _productDetail.id.toString(),
                 style: const TextStyle(
                     fontSize: 16.0, fontWeight: FontWeight.w500),
               ),
@@ -179,7 +184,7 @@ class _ProductContentState extends State<ProductContent> {
                 height: 20.0,
               ),
               Text(
-                'NT\$ ${_productListInfo.price}',
+                'NT\$ ${_productDetail.price}',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0,
@@ -219,13 +224,13 @@ class _ProductContentState extends State<ProductContent> {
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: _productListInfo.colorType.length,
+                          itemCount: _productDetail.colors.length,
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {
                                 setState(() {
                                   selectedColor =
-                                      _productListInfo.colorType[index];
+                                      _productDetail.colors[index].code;
                                 });
                                 setColorAndSizeCheckStock(
                                     selectedSize, selectedColor);
@@ -235,12 +240,12 @@ class _ProductContentState extends State<ProductContent> {
                                 width: 16.0,
                                 height: 16.0,
                                 decoration: BoxDecoration(
-                                  color:
-                                      Color(_productListInfo.colorType[index]),
+                                  color: Color(int.parse(
+                                      '0xFF${_productDetail.colors[index].code}')),
                                   shape: BoxShape.circle,
                                   border: Border.all(
                                     color: selectedColor ==
-                                            _productListInfo.colorType[index]
+                                            _productDetail.colors[index].code
                                         ? Colors.red
                                         : Colors.transparent,
                                     width: 2.0,
@@ -276,13 +281,13 @@ class _ProductContentState extends State<ProductContent> {
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: _productListInfo.colorType.length,
+                          itemCount: _productDetail.sizes.length,
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {
                                 setState(() {
                                   selectedSize =
-                                      _productListInfo.sizeType[index];
+                                      _productDetail.sizes[index].toString();
                                 });
                                 setColorAndSizeCheckStock(
                                     selectedSize, selectedColor);
@@ -296,7 +301,7 @@ class _ProductContentState extends State<ProductContent> {
                                   color: Colors.grey[800],
                                   border: Border.all(
                                     color: selectedSize ==
-                                            _productListInfo.sizeType[index]
+                                            _productDetail.sizes[index]
                                                 .toString()
                                         ? Colors.red
                                         : Colors.transparent,
@@ -304,7 +309,7 @@ class _ProductContentState extends State<ProductContent> {
                                   ),
                                 ),
                                 child: Text(
-                                  _productListInfo.sizeType[index],
+                                  _productDetail.sizes[index],
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 12.0),
                                 ),
@@ -413,10 +418,10 @@ class _ProductContentState extends State<ProductContent> {
                     width: 350,
                     margin: const EdgeInsets.only(top: 10.0),
                     child: Text(
-                      _productListInfo.productContent,
+                      '${_productDetail.note}\n${_productDetail.texture}\n洗滌: ${_productDetail.wash}\n${_productDetail.description}\n素材產地/ ${_productDetail.place}',
                       style: const TextStyle(
                         fontSize: 15.0,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                   ),

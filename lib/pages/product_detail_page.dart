@@ -4,9 +4,9 @@ import 'package:flutter_programe_johnny/widigets/product_detail/product_detail_s
 import '../widigets/product_detail/product_detail_big.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  String productId = '';
+  int productId;
 
-  ProductDetailPage({Key? key, this.productId = ''}) : super(key: key);
+  ProductDetailPage({Key? key, required this.productId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +39,10 @@ class ProductDetailPage extends StatelessWidget {
 }
 
 class _ProductDetailPage extends StatelessWidget {
-  String productId = '';
+  int productId;
   final ScrollController _scrollController = ScrollController();
 
-  _ProductDetailPage({Key? key, this.productId = ''}) : super(key: key);
+  _ProductDetailPage({Key? key, required this.productId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
