@@ -33,6 +33,9 @@ dependencies:
   dio: ^4.0.4
   http: ^0.13.3
   cached_network_image: ^3.2.3
+  fluttertoast: ^8.0.8
+
+
   
     
 
