@@ -2,9 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_programe_johnny/data/product_data.dart';
 import 'package:flutter_programe_johnny/main.dart';
-import 'package:flutter_programe_johnny/widigets/home_page/home_page_product_list_column.dart';
-
-import '../../pages/home_page.dart';
+import 'package:flutter_programe_johnny/pages/shopping_cart_page.dart';
 
 class ProductContent extends StatefulWidget {
   final Product productDetail;
@@ -120,7 +118,12 @@ class _ProductContentState extends State<ProductContent> {
             actions: <Widget>[
               InkWell(
                 onTap: () {
-                  Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ShoppingCartPage(),
+                    ),
+                  );
                 },
                 child: const Text(
                   '查看購物車',

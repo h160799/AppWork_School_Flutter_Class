@@ -150,6 +150,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  flutter_tappay:
+    dependency: "direct main"
+    description:
+      name: flutter_tappay
+      sha256: d51c9b0b3de6dd199a28ef52dd8b65e8f8d8f9ea6f98a25d0e828896ab058ff9
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.0+2"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -397,6 +405,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
+  tappayflutter:
+    dependency: "direct main"
+    description:
+      name: tappayflutter
+      sha256: "3b23b02acbc3dfab2a6db5dc5945ac0f36b673768b55dcaed7337d098a76bd25"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.7"
   term_glyph:
     dependency: transitive
     description:
