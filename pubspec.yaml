@@ -34,11 +34,8 @@ dependencies:
   http: ^0.13.3
   cached_network_image: ^3.2.3
   fluttertoast: ^8.0.8
-  flutter_tappay: ^0.3.0+2
 
 
-  
-    
 
 
 
@@ -47,7 +44,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^4.0.3
   carousel_slider: ^4.2.1
-  tappayflutter: ^0.0.7
 
 dev_dependencies:
   flutter_test:
@@ -64,7 +60,10 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
+
+
 flutter:
+  
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
