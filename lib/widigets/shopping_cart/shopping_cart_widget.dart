@@ -19,7 +19,6 @@ class _ShoppingCartWidgetState extends State<ShoppingCartWidget> {
         ShoppingCartProductList(),
         PaymentStyle(),
         PaymentInfo(),
-        SizedBox(height: 40.0,),
         Align(
           alignment: Alignment.centerLeft,
           child: PaymentPrice(),

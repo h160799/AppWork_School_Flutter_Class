@@ -4,14 +4,11 @@ import android.content.Intent.getIntent
 import android.os.Bundle
 import android.util.Log
 import androidx.annotation.NonNull
-import com.tungwang.tappayflutterplugin.TPDGooglePayListenerInterface
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import tech.cherri.tpdirect.api.*
-import com.google.android.gms.wallet.TransactionInfo
-import com.google.android.gms.wallet.WalletConstants
-import com.google.android.gms.wallet.PaymentData
+
 
 
 class MainActivity: FlutterActivity() {
@@ -20,13 +17,6 @@ class MainActivity: FlutterActivity() {
     private var LOAD_PAYMENT_DATA_REQUEST_CODE = 102
     private val tpdMerchant = TPDMerchant()
     private val tpdConsumer = TPDConsumer()
-
-    override fun onCreate(savedInstanceState: Bundle?){
-      super.onCreate(savedInstanceState)
-
-      val intent = get Intent()
-      // paymentData = PaymentData.getFromIntent(intent)
-    }
 
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
     super.configureFlutterEngine(flutterEngine)
@@ -75,48 +65,6 @@ class MainActivity: FlutterActivity() {
             })
           }
         }
-        // in "preparePaymentData" -> {
-        //   //取得allowedNetworks
-        //   val allowedNetworks: ArrayList<TPDCard.CardType> = ArrayList()
-        //   val cardTypeMap = mapOf(
-        //           Pair(0, TPDCard.CardType.Unknown),
-        //           Pair(1, TPDCard.CardType.JCB),
-        //           Pair(2, TPDCard.CardType.Visa),
-        //           Pair(3, TPDCard.CardType.MasterCard),
-        //           Pair(4, TPDCard.CardType.AmericanExpress),
-        //           Pair(5, TPDCard.CardType.UnionPay)
-        //   )
-  
-        //   val networks: List<Int>? = call.argument("allowedNetworks")
-        //   for (i in networks!!) {
-        //     val type = cardTypeMap[i]
-        //     type?.let { allowedNetworks.add(it) }
-        //   }
-  
-        //   //取得allowedAuthMethods
-        //   val allowedAuthMethods: MutableList<TPDCard.AuthMethod> = mutableListOf()
-        //   val authMethodMap = mapOf(
-        //           Pair(0, TPDCard.AuthMethod.PanOnly),
-        //           Pair(1, TPDCard.AuthMethod.Cryptogram3DS)
-        //   )
-        //   val authMethods: List<Int>? = call.argument("allowedAuthMethods")
-        //   for (i in authMethods!!) {
-        //     val type = authMethodMap[i]
-        //     type?.let { allowedAuthMethods.add(it) }
-        //   }
-  
-        //   val merchantName: String? = call.argument("merchantName")
-        //   val isPhoneNumberRequired: Boolean? = call.argument("isPhoneNumberRequired")
-        //   val isShippingAddressRequired: Boolean? = call.argument("isShippingAddressRequired")
-        //   val isEmailRequired: Boolean? = call.argument("isPhoneNumberRequired")
-  
-        //   preparePaymentData(allowedNetworks.toTypedArray(), allowedAuthMethods.toTypedArray(), merchantName, isPhoneNumberRequired, isShippingAddressRequired, isEmailRequired)
-        // }
-        // in "requestPaymentData" -> {
-        //   val totalPrice: String? = call.argument("totalPrice")
-        //   val currencyCode: String? = call.argument("currencyCode")
-        //   requestPaymentData(totalPrice, currencyCode)
-        // }
       }
     }
   }
@@ -189,23 +137,4 @@ class MainActivity: FlutterActivity() {
       card.createToken("Unknown")
     }
   }
-
-  // //request payment data
-  // private fun requestPaymentData(totalPrice: String?, currencyCode: String?) {
-  //   tpdGooglePay?.requestPayment(TransactionInfo.newBuilder()
-  //         .setTotalPriceStatus(WalletConstants.TOTAL_PRICE_STATUS_FINAL)
-  //         .setTotalPrice(totalPrice!!)
-  //         .setCurrencyCode(currencyCode!!)
-  //         .build(), LOAD_PAYMENT_DATA_REQUEST_CODE);
-  // }
 }
-
-
-
-// if (call.method == "callAndroid") {
-//   // 處理 callAndroid 方法的請求
-//       val response = "Hello from Android"
-//       result.success(response)
-//   } else {
-//   result.notImplemented()
-// }
