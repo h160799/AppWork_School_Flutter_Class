@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../data/tappay.dart';
+import '../../main.dart';
 import '../../my_singleton.dart';
 
 class PaymentPrice extends StatefulWidget {
@@ -114,6 +115,12 @@ class _PaymentPriceState extends State<PaymentPrice> {
             InkWell(
               onTap: () {
                 Navigator.of(context).pop();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MyApp(),
+                    ),
+                  );
                 Fluttertoast.showToast(
                     msg: _prime,
                     toastLength: Toast.LENGTH_LONG,
