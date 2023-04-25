@@ -1,14 +1,4 @@
 
-class ShoppingCartProductList {
- final List<ShoppingCartProduct> AllShoppingCartProduct;
-
-ShoppingCartProductList({
-    required this.AllShoppingCartProduct
- 
-  });
-
-}
-
 
 class ShoppingCartProduct {
   final int id;
@@ -16,6 +6,8 @@ class ShoppingCartProduct {
   final int price;
   final String color;
   final String size;
+  final int count;
+  final String mainImage;
 
   ShoppingCartProduct({
     required this.id,
@@ -23,6 +15,8 @@ class ShoppingCartProduct {
     required this.price,
     required this.color,
     required this.size,
+    required this.count,
+    required this.mainImage,
  
   });
 }

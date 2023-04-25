@@ -34,7 +34,7 @@ dependencies:
   http: ^0.13.3
   cached_network_image: ^3.2.3
   fluttertoast: ^8.0.8
-
+  shared_preferences: ^2.1.0
 
 
 

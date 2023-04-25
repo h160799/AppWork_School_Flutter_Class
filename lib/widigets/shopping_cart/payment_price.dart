@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../data/tappay.dart';
+import '../../my_singleton.dart';
 
 class PaymentPrice extends StatefulWidget {
   const PaymentPrice({super.key});
@@ -13,11 +14,11 @@ class PaymentPrice extends StatefulWidget {
 
 class _PaymentPriceState extends State<PaymentPrice> {
   static const platform = MethodChannel('com.example.flutter_programe_johnny');
+
+    MySingleton singleton = MySingleton();
+
   String _prime = '';
-  String _cardNumber = '4242424242424242';
-  String _dueMonth = '01';
-  String _dueYear = '26';
-  String _ccv = '123';
+ 
 
 
   @override
@@ -42,10 +43,10 @@ class _PaymentPriceState extends State<PaymentPrice> {
     final bool result = await platform.invokeMethod(
       'isCardValid',
       {
-        'cardNumber': _cardNumber,
-        'dueMonth': _dueMonth,
-        'dueYear': _dueYear,
-        'ccv': _ccv,
+        'cardNumber': singleton.cardNumber,
+        'dueMonth': singleton.dueMonth,
+        'dueYear': singleton.dueYear,
+        'ccv': singleton.ccv,
       },
     );
     print(result);
@@ -77,10 +78,10 @@ class _PaymentPriceState extends State<PaymentPrice> {
       final String result = await platform.invokeMethod(
         'getPrime',
         {
-          'cardNumber': _cardNumber,
-          'dueMonth': _dueMonth,
-          'dueYear': _dueYear,
-          'ccv': _ccv,
+        'cardNumber': singleton.cardNumber,
+        'dueMonth': singleton.dueMonth,
+        'dueYear': singleton.dueYear,
+        'ccv': singleton.ccv,
         },
       );
       print(result);
@@ -103,9 +104,11 @@ class _PaymentPriceState extends State<PaymentPrice> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Center(
-            child: Text('確定付款資訊', style: TextStyle(fontWeight: FontWeight.bold)),
+            child:
+                Text('確定付款資訊', style: TextStyle(fontWeight: FontWeight.bold)),
           ),
-          content: SizedBox(child: Text('信用卡號碼：$_cardNumber'),
+          content: SizedBox(
+            child: Text('信用卡號碼：${singleton.cardNumber}'),
           ),
           actions: <Widget>[
             InkWell(
@@ -187,9 +190,9 @@ class _PaymentPriceState extends State<PaymentPrice> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('總金額'),
-              Text('   NT\$ 1000 '),
+            children: [
+              const Text('總金額'),
+              Text('   NT\$ ${singleton.totalPrice} '),
             ],
           ),
           Row(
@@ -206,12 +209,12 @@ class _PaymentPriceState extends State<PaymentPrice> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
+            children: [
+              const Text(
                 '應付金額',
                 style: TextStyle(fontSize: 16.0),
               ),
-              Text(' NT\$ 1199', style: TextStyle(fontSize: 16.0)),
+              Text(' NT\$ ${singleton.totalPrice + 199}', style: TextStyle(fontSize: 16.0)),
             ],
           ),
           const SizedBox(

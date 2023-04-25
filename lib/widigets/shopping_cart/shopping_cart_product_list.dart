@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_programe_johnny/widigets/shopping_cart/shopping_cart_product_list_item.dart';
 
+import '../../my_singleton.dart';
+
 class ShoppingCartProductList extends StatefulWidget {
   const ShoppingCartProductList({super.key});
 
@@ -10,8 +12,15 @@ class ShoppingCartProductList extends StatefulWidget {
 }
 
 class _ShoppingCartProductListState extends State<ShoppingCartProductList> {
+
+  MySingleton singleton = MySingleton();
+
+
+
   @override
   Widget build(BuildContext context) {
+
+
     return Container(
       margin: const EdgeInsets.all(25.0),
       alignment: Alignment.center,
@@ -20,8 +29,8 @@ class _ShoppingCartProductListState extends State<ShoppingCartProductList> {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: const [
-              Text('購物車(3)'),
+            children:[
+              Text('購物車(${singleton.shoppingCartProductList.length})'),
             ],
           ),
           Container(
@@ -37,9 +46,9 @@ class _ShoppingCartProductListState extends State<ShoppingCartProductList> {
               child: ListView.builder(
                 physics: ClampingScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: 3,
+                itemCount: singleton.shoppingCartProductList.length,
                 itemBuilder: (context, index) {
-                  return const ShoppingCartProductListItem();
+                  return ShoppingCartProductListItem(item: singleton.shoppingCartProductList[index] );
                 },
               ),
             ),
