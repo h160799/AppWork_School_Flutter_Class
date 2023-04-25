@@ -33,7 +33,7 @@ class _PaymentStyleState extends State<PaymentStyle> {
         children: [
           const Text('配送地點'),
           const SizedBox(
-            width: 30.0,
+            width: 10.0,
           ),
           DropdownButton<String>(
             value: placeSelectedOption,
@@ -46,16 +46,16 @@ class _PaymentStyleState extends State<PaymentStyle> {
             items: deliveryPlace.map((String value) {
               return DropdownMenuItem<String>(
                 value: value,
-                child: Text(value),
+                child: Text(value,style: const TextStyle(fontSize: 12.0),),
               );
             }).toList(),
           ),
           const SizedBox(
-            width: 50.0,
+            width: 30.0,
           ),
           const Text('付款方式'),
           const SizedBox(
-            width: 30.0,
+            width: 10.0,
           ),
           DropdownButton<String>(
             value: paySelectedOption,
@@ -67,7 +67,7 @@ class _PaymentStyleState extends State<PaymentStyle> {
             items: paymentStyle.map((String value) {
               return DropdownMenuItem<String>(
                 value: value,
-                child: Text(value),
+                child: Text(value,style: const TextStyle(fontSize: 12.0),),
               );
             }).toList(),
           ),

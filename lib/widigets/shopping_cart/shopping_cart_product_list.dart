@@ -19,15 +19,12 @@ class _ShoppingCartProductListState extends State<ShoppingCartProductList> {
       child: Column(
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: const [
-              Text('購物車(1)'),
-              Text('數量'),
-              Text('單價'),
-              Text('小計'),
+              Text('購物車(3)'),
             ],
           ),
           Container(
-            padding: const EdgeInsets.all(20.0),
             decoration: BoxDecoration(
               border: Border.all(
                 color: Colors.black,
@@ -37,17 +34,13 @@ class _ShoppingCartProductListState extends State<ShoppingCartProductList> {
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                children: [
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: 3,
-                    itemBuilder: (context, index) {
-                      return const ShoppingCartProductListItem();
-                    },
-                  ),
-                ],
+              child: ListView.builder(
+                physics: ClampingScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  return const ShoppingCartProductListItem();
+                },
               ),
             ),
           ),

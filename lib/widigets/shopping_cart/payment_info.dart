@@ -19,7 +19,8 @@ class _PaymentInfoState extends State<PaymentInfo> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Expanded(child: 
+    Container(
         margin: const EdgeInsets.all(25.0),
         alignment: Alignment.centerRight,
         child: Column(
@@ -74,9 +75,11 @@ class _PaymentInfoState extends State<PaymentInfo> {
               color: Colors.grey[500],
             ),
             const PaymentInfoTextField(textFieldName: '信用卡號碼'),
-            const PaymentInfoTextField(textFieldName: '有效期限'),
+            const PaymentInfoTextField(textFieldName: '有效期限(月)'),
+            const PaymentInfoTextField(textFieldName: '有效期限(年)'),
             const PaymentInfoTextField(textFieldName: '安全碼'),
           ],
-        ));
+        )),
+    );
   }
 }

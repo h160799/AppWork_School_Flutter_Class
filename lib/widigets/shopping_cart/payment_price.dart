@@ -14,9 +14,14 @@ class PaymentPrice extends StatefulWidget {
 class _PaymentPriceState extends State<PaymentPrice> {
   static const platform = MethodChannel('com.example.flutter_programe_johnny');
   String _prime = '';
+  String _cardNumber = '4242424242424242';
+  String _dueMonth = '01';
+  String _dueYear = '26';
+  String _ccv = '123';
+
 
   @override
-  void initstate() {
+  void initState() {
     super.initState();
     _setupTappay();
   }
@@ -37,10 +42,10 @@ class _PaymentPriceState extends State<PaymentPrice> {
     final bool result = await platform.invokeMethod(
       'isCardValid',
       {
-        'cardNumber': '4242424242424242',
-        'dueMonth': '01',
-        'dueYear': '26',
-        'ccv': '123',
+        'cardNumber': _cardNumber,
+        'dueMonth': _dueMonth,
+        'dueYear': _dueYear,
+        'ccv': _ccv,
       },
     );
     print(result);
@@ -72,10 +77,10 @@ class _PaymentPriceState extends State<PaymentPrice> {
       final String result = await platform.invokeMethod(
         'getPrime',
         {
-          'cardNumber': '4111111111111111',
-          'dueMonth': '01',
-          'dueYear': '25',
-          'ccv': '123',
+          'cardNumber': _cardNumber,
+          'dueMonth': _dueMonth,
+          'dueYear': _dueYear,
+          'ccv': _ccv,
         },
       );
       print(result);
@@ -98,7 +103,9 @@ class _PaymentPriceState extends State<PaymentPrice> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Center(
-            child: Text('最後一步', style: TextStyle(fontWeight: FontWeight.bold)),
+            child: Text('確定付款資訊', style: TextStyle(fontWeight: FontWeight.bold)),
+          ),
+          content: SizedBox(child: Text('信用卡號碼：$_cardNumber'),
           ),
           actions: <Widget>[
             InkWell(
@@ -114,7 +121,7 @@ class _PaymentPriceState extends State<PaymentPrice> {
                     fontSize: 16.0);
               },
               child: const Text(
-                '繼續交易',
+                '確定',
                 style: TextStyle(
                   color: Colors.blueGrey,
                   fontWeight: FontWeight.w300,
@@ -129,7 +136,7 @@ class _PaymentPriceState extends State<PaymentPrice> {
                 Navigator.of(context).pop();
               },
               child: const Text(
-                '取消交易',
+                '取消',
                 style: TextStyle(
                   color: Colors.blueGrey,
                   fontWeight: FontWeight.w300,
@@ -179,15 +186,17 @@ class _PaymentPriceState extends State<PaymentPrice> {
             height: 50.0,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
               Text('總金額'),
-              Text('NT\$ 1000 '),
+              Text('   NT\$ 1000 '),
             ],
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
               Text('運費'),
-              Text('NT\$ 199 '),
+              Text('    NT\$ 199 '),
             ],
           ),
           Container(
@@ -196,9 +205,13 @@ class _PaymentPriceState extends State<PaymentPrice> {
             color: Colors.grey[500],
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
-              Text('應付金額'),
-              Text('NT\$ 1199 '),
+              Text(
+                '應付金額',
+                style: TextStyle(fontSize: 16.0),
+              ),
+              Text(' NT\$ 1199', style: TextStyle(fontSize: 16.0)),
             ],
           ),
           const SizedBox(

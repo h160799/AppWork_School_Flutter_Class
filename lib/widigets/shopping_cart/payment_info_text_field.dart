@@ -13,7 +13,8 @@ class PaymentInfoTextField extends StatefulWidget {
 class _PaymentInfoTextFieldState extends State<PaymentInfoTextField> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return 
+    Container(
       margin: const EdgeInsets.only(top: 10),
       child: Row(
         children: [
@@ -22,8 +23,9 @@ class _PaymentInfoTextFieldState extends State<PaymentInfoTextField> {
             height: 20,
             child: Text(widget.textFieldName),
           ),
+          Expanded(child:
           Container(
-            width: 850,
+            width: 800,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
@@ -39,8 +41,10 @@ class _PaymentInfoTextFieldState extends State<PaymentInfoTextField> {
               ),
             ),
           ),
+      ),
         ],
       ),
+    
     );
   }
 }

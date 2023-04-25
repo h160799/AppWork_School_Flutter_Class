@@ -15,14 +15,13 @@ class _ShoppingCartWidgetState extends State<ShoppingCartWidget> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: const [
-        ShoppingCartProductList(),
-        PaymentStyle(),
-        PaymentInfo(),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: PaymentPrice(),
-        ),
+      children: [
+        const ShoppingCartProductList(),
+        const PaymentStyle(),
+        const PaymentInfo(),
+        Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: const [PaymentPrice()]),
       ],
     );
   }
