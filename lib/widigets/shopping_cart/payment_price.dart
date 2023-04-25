@@ -99,6 +99,7 @@ class _PaymentPriceState extends State<PaymentPrice> {
   }
 
   Future<void> showAlert(BuildContext context) {
+    
     return showDialog<void>(
       barrierDismissible: false,
       context: context,
@@ -113,7 +114,7 @@ class _PaymentPriceState extends State<PaymentPrice> {
           ),
           actions: <Widget>[
             InkWell(
-              onTap: () {
+              onTap: () { 
                 Navigator.of(context).pop();
                 Navigator.push(
                     context,
@@ -121,6 +122,8 @@ class _PaymentPriceState extends State<PaymentPrice> {
                       builder: (context) => const MyApp(),
                     ),
                   );
+                singleton.removeProduct();
+
                 Fluttertoast.showToast(
                     msg: _prime,
                     toastLength: Toast.LENGTH_LONG,

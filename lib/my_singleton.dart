@@ -60,4 +60,10 @@ class MySingleton {
   set totalPrice(int value) {
     _totalPrice = value;
   }
+  
+  Future<void> removeProduct() async {
+    _shoppingCartProductList.clear();
+
+    totalPrice = 0;
+  }
 }
