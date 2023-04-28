@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_programe_johnny/widigets/product_detail/product_detail_small.dart';
-
+import 'package:flutter_programe_johnny/widigets/shopping_cart/icon_shopping_cart.dart';
 import '../widigets/product_detail/product_detail_big.dart';
 
 class ProductDetailPage extends StatelessWidget {
@@ -25,6 +25,9 @@ class ProductDetailPage extends StatelessWidget {
           backgroundColor: Colors.grey[200],
           automaticallyImplyLeading: true,
           iconTheme: const IconThemeData(color: Colors.black),
+          actions: const <Widget>[
+            IconShoppingCart(),
+          ],
         ),
       ),
       body: WillPopScope(
@@ -37,6 +40,7 @@ class ProductDetailPage extends StatelessWidget {
     );
   }
 }
+
 
 class _ProductDetailPage extends StatelessWidget {
   int productId;

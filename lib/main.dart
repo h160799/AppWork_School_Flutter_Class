@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_programe_johnny/pages/home_page.dart';
+import 'package:flutter_programe_johnny/widigets/shopping_cart/icon_shopping_cart.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 
 void main() => runApp(const MyApp());
 
@@ -19,7 +21,8 @@ class MyApp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
+              Container(
+                  margin: const EdgeInsets.only(left: 50.0),
                   width: 120.0, // 設置圖像寬度
                   child: InkWell(
                     onTap: () async {
@@ -45,6 +48,10 @@ class MyApp extends StatelessWidget {
             ],
           ),
           backgroundColor: Colors.grey[200],
+          iconTheme: const IconThemeData(color: Colors.black),
+          actions: const <Widget>[
+            IconShoppingCart(),
+          ],
         ),
         body: const HomePage(),
       ),

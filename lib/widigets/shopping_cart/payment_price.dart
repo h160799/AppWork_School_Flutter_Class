@@ -16,11 +16,9 @@ class PaymentPrice extends StatefulWidget {
 class _PaymentPriceState extends State<PaymentPrice> {
   static const platform = MethodChannel('com.example.flutter_programe_johnny');
 
-    MySingleton singleton = MySingleton();
+  MySingleton singleton = MySingleton();
 
   String _prime = '';
- 
-
 
   @override
   void initState() {
@@ -61,6 +59,7 @@ class _PaymentPriceState extends State<PaymentPrice> {
           backgroundColor: Colors.red,
           textColor: Colors.white,
           fontSize: 16.0);
+      showAlert(context);
     } else {
       Fluttertoast.showToast(
           msg: '卡號驗證失敗',
@@ -79,10 +78,10 @@ class _PaymentPriceState extends State<PaymentPrice> {
       final String result = await platform.invokeMethod(
         'getPrime',
         {
-        'cardNumber': singleton.cardNumber,
-        'dueMonth': singleton.dueMonth,
-        'dueYear': singleton.dueYear,
-        'ccv': singleton.ccv,
+          'cardNumber': singleton.cardNumber,
+          'dueMonth': singleton.dueMonth,
+          'dueYear': singleton.dueYear,
+          'ccv': singleton.ccv,
         },
       );
       print(result);
@@ -95,11 +94,18 @@ class _PaymentPriceState extends State<PaymentPrice> {
     setState(() {
       _prime = prime;
       print(_prime);
+      Fluttertoast.showToast(
+          msg: _prime,
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
     });
   }
 
   Future<void> showAlert(BuildContext context) {
-    
     return showDialog<void>(
       barrierDismissible: false,
       context: context,
@@ -114,24 +120,16 @@ class _PaymentPriceState extends State<PaymentPrice> {
           ),
           actions: <Widget>[
             InkWell(
-              onTap: () { 
+              onTap: () {
+                _getPrime();
                 Navigator.of(context).pop();
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const MyApp(),
-                    ),
-                  );
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MyApp(),
+                  ),
+                );
                 singleton.removeProduct();
-
-                Fluttertoast.showToast(
-                    msg: _prime,
-                    toastLength: Toast.LENGTH_LONG,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white,
-                    fontSize: 16.0);
               },
               child: const Text(
                 '確定',
@@ -171,33 +169,33 @@ class _PaymentPriceState extends State<PaymentPrice> {
       width: 200.0,
       child: Column(
         children: [
-          Row(children: [
-            Container(
-              width: 100.0,
-              height: 30.0,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: Colors.black,
-                  width: 1,
-                ),
-                shape: BoxShape.rectangle,
-              ),
-              child: InkWell(
-                onTap: () {
-                  _isCardValid();
-                },
-                child: const Text(
-                  '驗證卡號',
-                  style: TextStyle(fontSize: 12.0, color: Colors.red),
-                ),
-              ),
-            ),
-          ]),
-          const SizedBox(
-            height: 50.0,
-          ),
+          // Row(children: [
+          //   Container(
+          //     width: 100.0,
+          //     height: 30.0,
+          //     alignment: Alignment.center,
+          //     decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(10),
+          //       border: Border.all(
+          //         color: Colors.black,
+          //         width: 1,
+          //       ),
+          //       shape: BoxShape.rectangle,
+          //     ),
+          //     child: InkWell(
+          //       onTap: () {
+          //         _isCardValid();
+          //       },
+          //       child: const Text(
+          //         '驗證卡號',
+          //         style: TextStyle(fontSize: 12.0, color: Colors.red),
+          //       ),
+          //     ),
+          //   ),
+          // ]),
+          // const SizedBox(
+          //   height: 50.0,
+          // ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -224,7 +222,8 @@ class _PaymentPriceState extends State<PaymentPrice> {
                 '應付金額',
                 style: TextStyle(fontSize: 16.0),
               ),
-              Text(' NT\$ ${singleton.totalPrice + 199}', style: TextStyle(fontSize: 16.0)),
+              Text(' NT\$ ${singleton.totalPrice + 199}',
+                  style: TextStyle(fontSize: 16.0)),
             ],
           ),
           const SizedBox(
@@ -245,8 +244,9 @@ class _PaymentPriceState extends State<PaymentPrice> {
             ),
             child: InkWell(
               onTap: () {
-                _getPrime();
-                showAlert(context);
+                // _getPrime();
+                // showAlert(context);
+                _isCardValid();
               },
               child: const Text(
                 '確定結帳',
