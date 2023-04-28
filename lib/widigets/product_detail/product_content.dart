@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_programe_johnny/data/product_data.dart';
+import 'package:flutter_programe_johnny/data/shopping_cart_product_data.dart';
 import 'package:flutter_programe_johnny/main.dart';
-import 'package:flutter_programe_johnny/widigets/home_page/home_page_product_list_column.dart';
+import 'package:flutter_programe_johnny/pages/shopping_cart_page.dart';
 
-import '../../pages/home_page.dart';
+import '../../my_singleton.dart';
 
 class ProductContent extends StatefulWidget {
   final Product productDetail;
@@ -22,9 +23,21 @@ class _ProductContentState extends State<ProductContent> {
   String selectedSize = '';
   bool stockEnough = false;
 
+  MySingleton singleton = MySingleton();
+
   @override
   Widget build(BuildContext context) {
+    
     final _productDetail = widget.productDetail;
+
+    ShoppingCartProduct shoppingCartProduct = ShoppingCartProduct(
+        id: _productDetail.id,
+        title: _productDetail.title,
+        price: _productDetail.price,
+        color: '0xFF$selectedColor',
+        size: selectedSize,
+        count: _counter,
+        mainImage: _productDetail.mainImage);
 
     int getStock(String size, String color) {
       for (var variant in _productDetail.variants) {
@@ -120,7 +133,12 @@ class _ProductContentState extends State<ProductContent> {
             actions: <Widget>[
               InkWell(
                 onTap: () {
-                  Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ShoppingCartPage(),
+                    ),
+                  );
                 },
                 child: const Text(
                   '查看購物車',
@@ -398,6 +416,7 @@ class _ProductContentState extends State<ProductContent> {
                         null;
                       } else {
                         showAlert(context);
+                        singleton.addProduct(shoppingCartProduct);
                       }
                     },
                     child: Container(
