@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_programe_johnny/pages/home_page.dart';
+import 'package:flutter_programe_johnny/pages/map.dart';
 import 'package:flutter_programe_johnny/widigets/shopping_cart/icon_shopping_cart.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    return const MaterialApp(
+      home: MainPage(),
+    );
+  }
+}
+
+class MainPage extends StatelessWidget {
+  const MainPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,29 +34,28 @@ class MyApp extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                  margin: const EdgeInsets.only(left: 50.0),
-                  width: 120.0, // 設置圖像寬度
-                  child: InkWell(
-                    onTap: () async {
-                      String result = await _platformChannel.callAndroid();
-                      print(result);
+                margin: const EdgeInsets.only(left: 50.0),
+                width: 120.0,
+                child: InkWell(
+                  onTap: () async {
+                    String result = await _platformChannel.callAndroid();
+                    print(result);
 
-                      Fluttertoast.showToast(
-                          msg: result,
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
-
-                      // Success: Hello from Android
-                    },
-                    child: Image.asset(
-                      'assets/images/stylish_Logo.png',
-                      fit: BoxFit.fitWidth,
-                    ),
-                  )),
+                    Fluttertoast.showToast(
+                        msg: result,
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                  },
+                  child: Image.asset(
+                    'assets/images/stylish_Logo.png',
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+              ),
             ],
           ),
           backgroundColor: Colors.grey[200],
@@ -54,6 +65,21 @@ class MyApp extends StatelessWidget {
           ],
         ),
         body: const HomePage(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const MapSample(),
+              ),
+            );
+          },
+          tooltip: 'Store location',
+          backgroundColor:
+              Colors.black,
+          foregroundColor: Colors.white,
+          child: const Icon(Icons.location_on),
+        ),
       ),
     );
   }
