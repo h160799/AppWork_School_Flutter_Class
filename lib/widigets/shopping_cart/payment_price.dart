@@ -169,33 +169,6 @@ class _PaymentPriceState extends State<PaymentPrice> {
       width: 200.0,
       child: Column(
         children: [
-          // Row(children: [
-          //   Container(
-          //     width: 100.0,
-          //     height: 30.0,
-          //     alignment: Alignment.center,
-          //     decoration: BoxDecoration(
-          //       borderRadius: BorderRadius.circular(10),
-          //       border: Border.all(
-          //         color: Colors.black,
-          //         width: 1,
-          //       ),
-          //       shape: BoxShape.rectangle,
-          //     ),
-          //     child: InkWell(
-          //       onTap: () {
-          //         _isCardValid();
-          //       },
-          //       child: const Text(
-          //         '驗證卡號',
-          //         style: TextStyle(fontSize: 12.0, color: Colors.red),
-          //       ),
-          //     ),
-          //   ),
-          // ]),
-          // const SizedBox(
-          //   height: 50.0,
-          // ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -205,9 +178,9 @@ class _PaymentPriceState extends State<PaymentPrice> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('運費'),
-              Text('    NT\$ 199 '),
+            children: [
+              const Text('運費'),
+              Text('    NT\$ ${singleton.totalPrice == 0 ? 0 : 199} '),
             ],
           ),
           Container(
@@ -222,8 +195,8 @@ class _PaymentPriceState extends State<PaymentPrice> {
                 '應付金額',
                 style: TextStyle(fontSize: 16.0),
               ),
-              Text(' NT\$ ${singleton.totalPrice + 199}',
-                  style: TextStyle(fontSize: 16.0)),
+              Text(' NT\$ ${singleton.totalPrice == 0 ? 0 : singleton.totalPrice + 199}',
+                  style: const TextStyle(fontSize: 16.0)),
             ],
           ),
           const SizedBox(

@@ -51,7 +51,7 @@ class _PaymentStyleState extends State<PaymentStyle> {
             }).toList(),
           ),
           const SizedBox(
-            width: 30.0,
+            width: 20.0,
           ),
           const Text('付款方式'),
           const SizedBox(

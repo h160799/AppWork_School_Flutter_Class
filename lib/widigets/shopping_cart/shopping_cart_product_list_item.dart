@@ -114,7 +114,7 @@ class ShoppingCartProductListItem extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            width: 20.0,
+            width: 15.0,
           ),
           Expanded(
             child: Row(
@@ -123,9 +123,7 @@ class ShoppingCartProductListItem extends StatelessWidget {
                 Text(
                   '小計\nNT\$ $totalPrice ',
                 ),
-                const SizedBox(
-                  width: 10.0,
-                ),
+                
                 // const Icon(Icons.delete_forever_outlined),
               ],
             ),
